@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- // 用策略模式构建缓动动画 -->
+  <div style="position: absolute;background: blue;" id="div">
+    this is a div
+  </div>
+
+  <script>
+    const tween = {
+      linear: function (t, b, c, d) {
+        return c * t / d + b
+      },
+      easeIn: function (t, b, c, d) {
+        return c * (t /= d) + b
+      },
+      strongEaseIn: function (t, b, c, d) {
+        return c * (t /= d) * t * t * t * t + b
+      },
+    }
+
+    let Animation = function (dom) {
+      this.dom = dom
+      this.startTime = 0
+      this.startPostion = 0
+      this.endPostion = 0
+      this.propertyName = null
+      this.easing = null
+      this.duration = null
+    }
+
+    Animation.prototype.start = function (propertyName, endPostion, duration, easing) {
+      this.startTime = +new Date
+      this.startPostion = this.dom.getBoundingClientRect()[propertyName]
+      this.propertyName = propertyName
+      this.endPostion = endPostion
+      this.duration = duration
+      this.easing = tween[easing]
+
+      let self = this
+      let timer = () => {
+        let stepResult = self.step()
+        stepResult && requestAnimationFrame(timer)
+      }
+      timer()
+    }
+
+    Animation.prototype.step = function () {
+      console.log('step');
+      let t = +new Date
+      if (t >= this.startTime + this.duration) {
+        this.update(this.endPostion)
+        return false
+      }
+      const position = this.easing(t - this.startTime, this.startPostion, this.endPostion - this.startPostion, this.duration)
+      this.update(position)
+      return true
+    }
+
+    Animation.prototype.update = function (position) {
+      console.log('update');
+      this.dom.style[this.propertyName] = position + 'px'
+    }
+
+    let div = document.querySelector('#div')
+    let animate = new Animation(div)
+    animate.start('left', 500, 1000, 'easeIn')
+  </script>
+</body>
+
+</html>
