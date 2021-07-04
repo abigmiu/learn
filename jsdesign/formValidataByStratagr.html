@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 策略模式表单验证 -->
+  <script>
+    const startegies = {
+      isNonEmpty: function(value, errorMsg) {
+        if (value === '') {
+          return errorMsg
+        }
+      },
+      minLength: function(value, length, errorMsg) {
+        if (value.length < length) {
+          return errorMsg;
+        }
+      },
+      isMobile: function(value, erroeMsg) {
+        if (!/(~1[3|5|8][0-9]{9}$)/.test(value)) {
+          return errorMsg
+        }
+      }
+    }
+
+    const validataFunc = function() {
+      const validator = new Validator()
+
+      validator.add(registerForm.username, 'isNonEmpty', '用户名不能为空')
+      const errorMsg = validator.start()
+      return errorMsg
+    }
+
+    const Validator = function() {
+      this.cache = [] //保存校验规则
+    }
+    Validator.prototype.add = function(dom, rule, errorMsg) {
+      let ary = rule.split(':')
+      this.cache.push(function() {
+        let strategy = ary.shift()
+        ary.unshift(dom.value)
+        ary.push(erroeMsg)
+        return startegies[startegies].apply(dom, ary)
+      })
+    }
+
+    Validator.prototype.start = function() {
+      for (let i = 0; validataFunc; validataFunc = this.cache[i++]) {
+        let msg = validataFunc()
+        if (msg) {
+          return msg
+        }
+      }
+    }
+  </script>
+</body>
+</html>
