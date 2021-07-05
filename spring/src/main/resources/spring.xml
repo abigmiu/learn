@@ -5,5 +5,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="student" class="Student"></bean>
+    <bean id="student" class="Student">
+        <property name="id" value="12"></property>
+    </bean>
+
+    <bean id="student2" class="Student">
+        <constructor-arg name="id" value="34"></constructor-arg>
+        <constructor-arg name="name" value="34"></constructor-arg>
+        <constructor-arg name="age" value="34"></constructor-arg>
+    </bean>
 </beans>
