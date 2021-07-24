@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./render.js"></script>
+  <style>
+    .red {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const vnode = h('tag', { class: 'red', id: 'miu' }, [
+      h("h2", null, "当前计数: 100"),
+      h("button", {onClick: function() {}}, "+1")
+    ])
+
+    mount(vnode, document.querySelector('body'))
+
+    function fun() {
+      console.log(1)
+    }
+
+    const vnode1 = h('div', {onClick: fun, class: 'red'})
+    const vnode1 = h('div', {onClick: fun, class: 'green'})
+  </script>
+</body>
+</html>
