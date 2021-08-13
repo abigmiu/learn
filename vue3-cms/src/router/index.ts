@@ -1,16 +1,24 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 
-const routes: Array<RouteRecordRaw> = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'Home',
-    component: () => import(/* webpackChunkName: Home */ '@/views/Home.vue')
+    redirect: '/login'
+  },
+  {
+    path: '/login',
+    component: () => import('@/views/login/login.vue')
+  },
+  {
+    path: '/main',
+    component: () => import('@/views/main/main.vue')
   }
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes
+  routes,
+  history: createWebHashHistory()
 })
 
 export default router
