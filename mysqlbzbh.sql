@@ -30,3 +30,14 @@ select avg(prod_price) as avg_price from products;
 select count(prod_price) as count_price from products;
 # 只包含不同的值
 select avg(distinct prod_price) as avg_price from products;
+
+#子查询
+select cust_name, cust_contact from customers where cust_id in (select cust_id from orders where order_num in (select order_num from orderitems where prod_id = 'TNT2'));
+
+select count(*) as orders from orders where cust_id = 10001;
+select cust_name, cust_state, (select count(*) from orders where orders.cust_id = customers.cust_id) as orders from customers order by cust_name;
+
+
+# 联结
+select vend_name, prod_name, prod_price from vendors, products where vendors.vend_id = products.vend_id order by vend_name, prod_name;
+select vend_name, prod_name, prod_price from vendors inner join products on vendors.vend_id = products.vend_id;
