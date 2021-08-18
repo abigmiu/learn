@@ -147,3 +147,36 @@ select customers.cust_id, orders.order_num from customers inner join orders on c
 
 # 组合查询
 select vend_id, prod_id, prod_name from products where prod_price <= 5 union select vend_id, prod_id, prod_price from products where vend_id in (1001, 1002)
+
+# 全文搜索
+select note_text from productnotes where MAtch(note_text) Against('rabbit')
+
+# 插入
+## 自增id插入null不安全
+insert into customers values(null, '1','1','1','1','1',null, null,null)
+## 安全做法
+insert into customers(cust_name, cust_address, cust_city, cust_state, cust_zip, cust_country, cust_contact, cust_email) values('pen', '100', 'los', 'ca', '90046', 'usa', null, null)
+
+## 插入多行
+insert into customers(cust_name,
+cust_address,
+	cust_city,
+	cust_state,
+	cust_zip,
+	cust_country
+) values (
+	'pep',
+	'100',
+	'los',
+	'ca',
+	'90046',
+	'usa'
+), (
+	'pep',
+	'100',
+	'los',
+	'ca',
+	'90046',
+	'usa'
+)
+
