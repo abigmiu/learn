@@ -236,3 +236,33 @@ WHERE
 	
 	
 select * from productcustomers
+
+# 存储过程
+create procedure productpricing()
+begin
+	select avg(prod_price) as priceacerage from products;
+end;
+
+call productpricing();
+
+drop procedure productpricing;
+
+create procedure productpricing(
+	out pl decimal(8, 2),
+	out ph decimal(8, 2),
+	out pa decimal(8, 2)
+)
+begin
+	select min(prod_price)
+	into pl
+	from products;
+	select max(prod_price)
+	into ph
+	from products;
+	select avg(prod_price)
+	into pa
+	from products;
+end;
+
+call productpricing(@pricelow, @pricehign, @priceavg);
+select @pricelow;
