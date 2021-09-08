@@ -42,7 +42,7 @@ export default defineComponent({
     const accountRef = ref<InstanceType<typeof LoginAccount>>()
 
     const handleLoginClick = () => {
-      accountRef.value?.loginAction()
+      accountRef.value?.accountLoginAction()
     }
 
     return {

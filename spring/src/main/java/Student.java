@@ -10,4 +10,5 @@ public class Student {
     private String name;
     private Integer age;
     private Classes classes;
+    private String lover;
 }

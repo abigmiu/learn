@@ -1,13 +1,20 @@
 <template>
-  <div>Main</div>
+  <div class="main">
+    <el-container class="main-content">
+      <el-aside :width="isCollapse ? '60px' : '210px'"> 123 </el-aside>
+    </el-container>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {
-    return {}
+    const isCollapse = ref(false)
+    return {
+      isCollapse
+    }
   }
 })
 </script>

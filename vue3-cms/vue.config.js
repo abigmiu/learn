@@ -23,5 +23,18 @@ module.exports = {
     config.resolve.alias
       .set('@', path.resolve(__dirname, 'src'))
       .set('components', '@/components')
+      .set('views', '@/views')
+  },
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://152.136.185.210:4000/',
+        pathRewrite: {
+          '^/api': ''
+        },
+        ws: true,
+        changeOrigin: true
+      }
+    }
   }
 }
