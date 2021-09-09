@@ -1,7 +1,7 @@
 import type { Module } from 'vuex'
 import type { ILoginState } from './types'
 import type { IRootState } from '../types'
-import { menuMapToRoutes } from '@/utils/map-menus'
+import { menuMapToRoutes, menuMapToPermissions } from '@/utils/map-menus'
 
 import router from '@/router'
 
@@ -29,8 +29,16 @@ const login: Module<ILoginState, IRootState> = {
       state.userInfo = userInfo
     },
     saveUserMenus(state, userMenus: any) {
+      console.log('userMenus')
+      console.table(userMenus)
       state.userMenus = userMenus
-      menuMapToRoutes(userMenus)
+      const routes = menuMapToRoutes(userMenus)
+      routes.forEach((route) => {
+        router.addRoute('main', route)
+      })
+
+      const permissions = menuMapToPermissions(userMenus)
+      state.permissions = permissions
     }
   },
   actions: {

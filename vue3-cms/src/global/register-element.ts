@@ -11,7 +11,9 @@ import {
   ElTabPane,
   ElTabs,
   ElContainer,
-  ElAside
+  ElAside,
+  ElMenu,
+  ElMenuItem
 } from 'element-plus'
 
 const components = [
@@ -25,7 +27,9 @@ const components = [
   ElCheckbox,
   ElLink,
   ElContainer,
-  ElAside
+  ElAside,
+  ElMenu,
+  ElMenuItem
 ]
 
 export default function (app: App): void {
