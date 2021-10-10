@@ -1,7 +1,3 @@
-import lombok.Data;
+public static void main(String[]args){
 
-@Data
-public class User {
-    private Integer id;
-    private  String name;
-}
+        }
