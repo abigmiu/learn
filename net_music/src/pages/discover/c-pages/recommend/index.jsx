@@ -1,4 +1,18 @@
 import React from "react";
+
+import TopBanner from "./c-cpns/top-banner";
+
+import {
+  RecommendWrapper,
+  Content,
+  RecommendLeft,
+  RecommendRight,
+} from "./style";
+
 export default function Recommend() {
-  return <div>123</div>;
+  return (
+    <RecommendWrapper>
+      <TopBanner></TopBanner>
+    </RecommendWrapper>
+  );
 }
