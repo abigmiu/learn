@@ -39,9 +39,9 @@ const changeOriginRankingAction = (res) => ({
 });
 
 export const getTopBannerAction = () => {
+  console.log("getTopBannerAction");
   return (dispatch) => {
     getTopBanners().then((res) => {
-      console.log(res);
       dispatch(changeTopBannerAction(res));
     });
   };

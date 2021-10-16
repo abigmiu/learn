@@ -20,7 +20,7 @@ export default function TopBanner() {
   const bannerRef = useRef();
 
   useEffect(() => {
-    dispathch(getTopBannerAction);
+    dispathch(getTopBannerAction());
   }, [dispathch]);
 
   const bannerChange = useCallback((from, to) => {
@@ -44,7 +44,7 @@ export default function TopBanner() {
           >
             {topBanners.map((item, index) => {
               return (
-                <div className="banner-item" ley={item.imageUrl}>
+                <div className="banner-item" key={item.imageUrl}>
                   <img
                     className="iamge"
                     src={item.imageUrl}
