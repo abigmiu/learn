@@ -5,7 +5,7 @@ import { shallowEqual, useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getHotRecommendAction } from "../../store/actionCreatpr";
 import ThemeHeaderRCM from "@/components/theme-header-rcm";
-
+import SongCover from "@/components/songs-cover";
 export default function HotRecommend() {
   const { hotRecommends } = useSelector(
     (state) => ({
@@ -25,6 +25,12 @@ export default function HotRecommend() {
         title="热门推荐"
         keywords={["华语", "流行", "民谣", "摇滚", "电子"]}
       ></ThemeHeaderRCM>
+      <div className="recommend-list">
+        {hotRecommends.map((item, index) => {
+          console.log(item);
+          return <SongCover key={item.id} info={item}></SongCover>;
+        })}
+      </div>
     </HotRecommendWrapper>
   );
 }
