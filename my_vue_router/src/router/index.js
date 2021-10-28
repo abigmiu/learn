@@ -16,6 +16,7 @@ export default class VueRouter {
         history.listen((route) => {
             Vue._route = route
         })
+
     }
 }
 VueRouter.install = install
