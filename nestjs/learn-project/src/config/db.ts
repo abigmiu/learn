@@ -2,8 +2,8 @@ const config = {
     mysql: {
         port: 3306,
         host: 'localhost',
-        username: 'ganguo',
-        password: 'gg120521',
+        username: 'root',
+        password: '22d02ef3dc2160b6',
         database: 'nest'
     }
 }
