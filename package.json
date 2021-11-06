@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.1",
     "ts-standard": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/hapi__joi": "^17.1.7"
   }
 }
