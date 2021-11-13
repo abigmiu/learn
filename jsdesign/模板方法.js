@@ -39,4 +39,4 @@ Coffee.prototype.addConduiments = function () {
 const coffee = new Coffee()
 coffee.init()
 
-//  Beverage.prototype.init 是模板方法
+//  Beverage.prototype.init 是模板方法, 里面安顺序执行了一系列操作
