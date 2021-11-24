@@ -362,11 +362,13 @@ export function stateMixin(Vue: Class<Component>) {
   Object.defineProperty(Vue.prototype, "$data", dataDef);
   Object.defineProperty(Vue.prototype, "$props", propsDef);
 
-  debugger;
-
   Vue.prototype.$set = set;
   Vue.prototype.$delete = del;
 
+  // DEBUG:
+  // console.log(Vue);
+
+  // NOTE: Vue.prototype.$watch
   Vue.prototype.$watch = function (
     expOrFn: string | Function,
     cb: any,
@@ -385,6 +387,7 @@ export function stateMixin(Vue: Class<Component>) {
       invokeWithErrorHandling(cb, vm, [watcher.value], vm, info);
       popTarget();
     }
+    // 返回一个函数用来移除依赖
     return function unwatchFn() {
       watcher.teardown();
     };
