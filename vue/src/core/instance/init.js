@@ -46,7 +46,6 @@ export function initMixin(Vue: Class<Component>) {
       // DEBUG:
       console.log("step1 mergeOptions");
       console.log(vm);
-      debugger;
       vm.$options = mergeOptions(
         resolveConstructorOptions(vm.constructor),
         options || {},

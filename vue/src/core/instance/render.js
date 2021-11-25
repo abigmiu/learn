@@ -87,7 +87,6 @@ export function renderMixin(Vue: Class<Component>) {
   installRenderHelpers(Vue.prototype);
   console.log("renderMixin");
   console.dir(Vue);
-  debugger;
 
   Vue.prototype.$nextTick = function (fn: Function) {
     return nextTick(fn, this);
