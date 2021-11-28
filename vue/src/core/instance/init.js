@@ -14,6 +14,9 @@ let uid = 0;
 
 export function initMixin(Vue: Class<Component>) {
   Vue.prototype._init = function (options?: Object) {
+    console.warn("new Vue start");
+    console.dir(Vue);
+
     // vm实例
     const vm: Component = this;
     // a uid
@@ -27,7 +30,7 @@ export function initMixin(Vue: Class<Component>) {
       mark(startTag);
     }
 
-    // note:避免被监测
+    // NOTE:避免被监测
     // a flag to avoid this being observed
     vm._isVue = true;
 
@@ -37,6 +40,7 @@ export function initMixin(Vue: Class<Component>) {
     console.warn("initMixin");
     console.log(options);
     if (options && options._isComponent) {
+      // 内部选项， 不走这
       // optimize internal component instantiation
       // since dynamic options merging is pretty slow, and none of the
       // internal component options needs special treatment.
@@ -46,6 +50,8 @@ export function initMixin(Vue: Class<Component>) {
       // DEBUG:
       console.log("step1 mergeOptions");
       console.log(vm);
+
+      // NOTE: 合并options用来初始化
       vm.$options = mergeOptions(
         resolveConstructorOptions(vm.constructor),
         options || {},
@@ -108,12 +114,17 @@ export function initInternalComponent(
   }
 }
 
+/**
+ * 解析构造函数的options
+ * @param {*} Ctor
+ * @returns
+ */
 export function resolveConstructorOptions(Ctor: Class<Component>) {
   // Ctor vue构造函数
   let options = Ctor.options;
   // DEBUG:
   console.warn("resolveConstructorOptions");
-  console.log(Ctor);
+  console.dir(Ctor);
   // 针对Vue.extends()
   if (Ctor.super) {
     console.log("Ctor-super");
@@ -135,7 +146,8 @@ export function resolveConstructorOptions(Ctor: Class<Component>) {
       }
     }
   }
-  console.log(options);
+  console.dir(options);
+  debugger;
   /**
    * @returns options
    * components: {KeepAlive: {…}, Transition: {…}, TransitionGroup: {…}}

@@ -5,7 +5,6 @@ import { isPlainObject, validateComponentName } from "../util/index";
 
 export function initAssetRegisters(Vue: GlobalAPI) {
   console.log("initAssetRegisters");
-  debugger;
   /**
    * Create asset registration methods.
    */
