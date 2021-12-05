@@ -92,9 +92,9 @@ function initProps(vm: Component, propsOptions: Object) {
         if (!isRoot && !isUpdatingChildComponent) {
           warn(
             `Avoid mutating a prop directly since the value will be ` +
-              `overwritten whenever the parent component re-renders. ` +
-              `Instead, use a data or computed property based on the prop's ` +
-              `value. Prop being mutated: "${key}"`,
+            `overwritten whenever the parent component re-renders. ` +
+            `Instead, use a data or computed property based on the prop's ` +
+            `value. Prop being mutated: "${key}"`,
             vm
           );
         }
@@ -120,7 +120,7 @@ function initData(vm: Component) {
     process.env.NODE_ENV !== "production" &&
       warn(
         "data functions should return an object:\n" +
-          "https://vuejs.org/v2/guide/components.html#data-Must-Be-a-Function",
+        "https://vuejs.org/v2/guide/components.html#data-Must-Be-a-Function",
         vm
       );
   }
@@ -143,7 +143,7 @@ function initData(vm: Component) {
       process.env.NODE_ENV !== "production" &&
         warn(
           `The data property "${key}" is already declared as a prop. ` +
-            `Use prop default value instead.`,
+          `Use prop default value instead.`,
           vm
         );
     } else if (!isReserved(key)) {
@@ -172,12 +172,18 @@ const computedWatcherOptions = { lazy: true };
 
 function initComputed(vm: Component, computed: Object) {
   // $flow-disable-line
+  // 定义一个变量wathcers 和 vue实例（vm）添加一个新的属性（_computedWatchers）
+  // 这两个的值为空对象
   const watchers = (vm._computedWatchers = Object.create(null));
   // computed properties are just getters during SSR
+  // 判断是不是SSR
   const isSSR = isServerRendering();
-
+  console.log(1234234)
+  // 遍历compued
   for (const key in computed) {
+    // 定义的computed的值
     const userDef = computed[key];
+    // 判断对象还是函数， getter始终是一个函数
     const getter = typeof userDef === "function" ? userDef : userDef.get;
     if (process.env.NODE_ENV !== "production" && getter == null) {
       warn(`Getter is missing for computed property "${key}".`, vm);
@@ -185,6 +191,8 @@ function initComputed(vm: Component, computed: Object) {
 
     if (!isSSR) {
       // create internal watcher for the computed property.
+      // 为计算属性创建内部观察者
+      console.error('computed')
       watchers[key] = new Watcher(
         vm,
         getter || noop,
@@ -197,8 +205,12 @@ function initComputed(vm: Component, computed: Object) {
     // component prototype. We only need to define computed properties defined
     // at instantiation here.
     if (!(key in vm)) {
+      // 将compute挂载到vm上， 直接访问
       defineComputed(vm, key, userDef);
+      console.warn(vm)
+      debugger
     } else if (process.env.NODE_ENV !== "production") {
+      // 判断是否和data， props， methods重复， 报警告
       if (key in vm.$data) {
         warn(`The computed property "${key}" is already defined in data.`, vm);
       } else if (vm.$options.props && key in vm.$options.props) {
@@ -250,6 +262,7 @@ export function defineComputed(
 }
 
 function createComputedGetter(key) {
+  // 返回一个函数赋值给get
   return function computedGetter() {
     const watcher = this._computedWatchers && this._computedWatchers[key];
     if (watcher) {
@@ -277,9 +290,9 @@ function initMethods(vm: Component, methods: Object) {
       if (typeof methods[key] !== "function") {
         warn(
           `Method "${key}" has type "${typeof methods[
-            key
+          key
           ]}" in the component definition. ` +
-            `Did you reference the function correctly?`,
+          `Did you reference the function correctly?`,
           vm
         );
       }
@@ -289,7 +302,7 @@ function initMethods(vm: Component, methods: Object) {
       if (key in vm && isReserved(key)) {
         warn(
           `Method "${key}" conflicts with an existing Vue instance method. ` +
-            `Avoid defining component methods that start with _ or $.`
+          `Avoid defining component methods that start with _ or $.`
         );
       }
     }
@@ -302,7 +315,7 @@ function initWatch(vm: Component, watch: Object) {
   for (const key in watch) {
     const handler = watch[key];
     if (Array.isArray(handler)) {
-      for (let i = 0; i < handler.length; i++) {
+      for (let i = 0;i < handler.length;i++) {
         createWatcher(vm, key, handler[i]);
       }
     } else {
@@ -347,7 +360,7 @@ export function stateMixin(Vue: Class<Component>) {
     dataDef.set = function () {
       warn(
         "Avoid replacing instance root $data. " +
-          "Use nested data properties instead.",
+        "Use nested data properties instead.",
         this
       );
     };

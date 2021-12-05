@@ -8,7 +8,7 @@
   </head>
 
   <body>
-    <div id="app">{{ a.b }}</div>
+    <div id="app">{{ data.a.b }}{{ cvalue }}</div>
     <script src="../dist/vue.js"></script>
     <script>
       new Vue({
@@ -26,11 +26,24 @@
         },
         data() {
           return {
-            a: {
-              b: 1,
+            data: {
+              a: {
+                b: 1,
+              },
             },
           };
         },
+        mounted() {
+          console.dir(this.data);
+        },
+        created() {
+          console.log('created')
+        },
+        computed: {
+          cvalue: function () {
+            return this.data.a
+          }
+        }
       });
     </script>
   </body>

@@ -93,6 +93,7 @@ export default class Watcher {
       }
     }
     this.value = this.lazy ? undefined : this.get();
+    console.log(this.value)
   }
 
   /**
