@@ -18,7 +18,7 @@ counter.increment()
 
 <template>
   <h1>{{ counter.count }}</h1>
-
+  <h1>{{ counter.doubleCount }}</h1>
   <p>
     Recommended IDE setup:
     <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
